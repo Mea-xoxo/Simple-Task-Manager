@@ -1,0 +1,32 @@
+{% extends 'tasks-temps/base.html' %}
+{% block content %}
+<h1>My Tasks </h1>
+<a href = "{% url 'logout' %}" class = "btn btn-danger">Logout</a>
+<a href = "{% url 'task_create' %}" class = "btn btn-primary"> +Add Task </a>
+<ul class = "task-list">
+    {% for task in tasks %}
+    <li class = "task-item">
+        <div>
+            <strong> {{ task.title }} </strong>
+            <p>{{ task.description }}</p>
+             {% if task.due_date %}
+                <p>Due: {{task.due_date }}</p>
+            {%endif %}
+            <p>Priority: {{task.get_priority_display }}</p>
+        </div>
+        <div>
+            {% if not task.completed %}
+                <a href = "{% url 'task_complete' task.pk %}" class = "btn btn-success">Complete</a> 
+            {% else %}
+                <span class = "badge">Done </span>
+            {% endif %}
+                <a href = "{%url 'task_edit' task.pk %}" class = "btn btn-primary">Edit</a>
+                <a href = "{% url 'task_delete' task.pk %}" class = "btn btn-danger">Delete</a>
+        </div>
+        
+
+
+    </li>
+   {% endfor %}  
+</ul>
+{% endblock %}

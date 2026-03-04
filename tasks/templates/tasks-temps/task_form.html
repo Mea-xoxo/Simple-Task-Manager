@@ -1,0 +1,26 @@
+{% extends 'tasks-temps/base.html' %}
+
+{% block content %}
+    <h1>Add Task</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Enter task title" required>
+        
+        <label>Description</label>
+        <textarea name="description" placeholder="Enter task description"></textarea>
+        
+        <label>Due Date</label>
+        <input type="date" name="due_date">
+        
+        <label>Priority</label>
+        <select name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">Back</a>
+    </form>
+{% endblock %}
