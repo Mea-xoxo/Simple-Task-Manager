@@ -1,6 +1,7 @@
 {% extends 'tasks-temps/base.html' %}
 
 {% block content %}
+<div class = "auth-container">
 <h1> Register </h1>
 <form method = "POST">
     {% csrf_token %}
@@ -10,4 +11,5 @@
     <a href = "{% url 'login' %}" class = "btn btn-secondary">Back to Login</a>
 
 </form>
+</div>
 {% endblock %}

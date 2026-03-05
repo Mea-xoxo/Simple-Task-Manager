@@ -1,6 +1,7 @@
 {% extends 'tasks-temps/base.html' %}
 
 {% block content %}
+<div class = "auth-container">
     <h1>Login </h1>
     {%if error %}
     <p style = "color: red;">{{error }}</p>
@@ -13,5 +14,6 @@
         <a href = "{%url 'register' %}" class = 'btn btn-secondary'>Register</a>
 
     </form>
+</div>
 
 {% endblock %}
