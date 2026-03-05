@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User 
 from .models import Task
-
+from datetime import date
 @login_required
 def task_list(request):
     tasks = Task.objects.filter(user = request.user)
-    return render(request,'tasks-temps/task_list.html',{'tasks':tasks})
+    return render(request,'tasks-temps/task_list.html',{'tasks':tasks, 'today':date.today()})
+
 
 
 @login_required

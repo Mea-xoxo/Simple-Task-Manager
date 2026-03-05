@@ -1,11 +1,14 @@
 {% extends 'tasks-temps/base.html' %}
 {% block content %}
 <h1>My Tasks </h1>
+<p>Welcome,{{ request.user.username }}!</p>
+<p> You have {{ tasks.count }} task{{ tasks.count|pluralize }}</p>
+
 <a href = "{% url 'logout' %}" class = "btn btn-danger">Logout</a>
 <a href = "{% url 'task_create' %}" class = "btn btn-primary"> +Add Task </a>
 <ul class = "task-list">
     {% for task in tasks %}
-    <li class = "task-item">
+    <li class = "task-item {% if task.due_date and task.due_date < today and not task.completed %}overdue{% endif %}">
         <div>
             <strong> {{ task.title }} </strong>
             <p>{{ task.description }}</p>

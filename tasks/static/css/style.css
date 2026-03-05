@@ -51,6 +51,7 @@ h1 {
     background-color:#95a5e6;
 }
 
+
 /*styling task_list item */
 .task-list {
     list-style: none;
@@ -84,6 +85,10 @@ h1 {
     font-size:12px;
 }
 
+.task-item.overdue{
+    border-left:4px solid #e74c3c;
+    background-color: #fdecea;
+}
 /* styling the form */
 form {
     background-color: white;
@@ -126,3 +131,4 @@ form button,
 form a {
     margin-right: 10px;
 }
+
