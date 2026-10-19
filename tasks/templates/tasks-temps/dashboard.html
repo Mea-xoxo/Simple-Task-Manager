@@ -1,0 +1,42 @@
+{% extends 'tasks-temps/base.html' %}
+{% load static%}
+
+{% block content %}
+
+<h1>Welcome Back, {{request.user.username}}!</h1>
+
+
+<div class="cards">
+    <div class="card">
+        <h2>{{ total_tasks }}</h2>
+        <p>Total Tasks</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ completed_tasks }}</h2>
+        <p>Completed</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ pending_tasks }}</h2>
+        <p>Pending</p>
+    </div>
+</div>
+
+<h3>Recent Tasks</h3>
+
+{% for task in tasks %}
+    <p>
+        {% if task.completed %}
+            ✅ {{ task.title }}
+        {% else %}
+            ⏳ {{ task.title }}
+        {% endif %}
+    </p>
+{% empty %}
+    <p>No tasks yet</p>
+{% endfor %}
+
+<a href="{% url 'task_list' %}">Go To Tasks</a>
+
+{% endblock %}
