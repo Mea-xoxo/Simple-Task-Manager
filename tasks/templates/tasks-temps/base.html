@@ -1,18 +1,53 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Task-Manager App</title>
-    {%load static%}
-    <link rel = "stylesheet" href ="{%static 'css/style.css' %}">
+    <title>Task Manager App</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 
 <body>
-<div class = "container">
-    {% block content %}
-    {% endblock %}
+{% if user.is_authenticated %}
 
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <button id = "toggle-btn">❖ </button>
+        <h2>Task Manager</h2>
+
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+
+        <a href="{% url 'task_list' %}">My Tasks</a>
+
+        <a href="{% url 'task_create' %}">Add New Task</a>
+
+        <a href = "{%url 'logout' %}">Logout</a>
+    </aside>
+{% endif %}
+    <main class="main-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+ 
 </div>
 
-</body>
+<script>
+    const toggleButton = document.getElementById("toggle-btn");
+    const sidebar = document.querySelector(".sidebar");
 
+    if (toggleButton && sidebar){
+    toggleButton.addEventListener("click",function(){
+        sidebar.classList.toggle("collapsed");
+
+    });
+}
+
+
+</script>
+
+
+</body>
 </html>

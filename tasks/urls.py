@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns =[
+    path('dashboard/',views.dashboard,name = 'dashboard'),
     path('',views.task_list,name = 'task_list'),
     path('create/',views.task_create,name = 'task_create'),
     path('complete/<int:pk>/',views.task_complete,name = 'task_complete'),
@@ -11,4 +12,7 @@ urlpatterns =[
     path('login/',views.user_login,name = 'login'),
     path('logout/',views.user_logout,name = 'logout'),
     path('edit/<int:pk>/', views.task_edit,name ='task_edit')
+    
+
+
 ]
