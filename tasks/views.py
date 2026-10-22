@@ -72,14 +72,38 @@ def task_delete(request,pk):
     task.delete()
     return redirect('task_list')
 
-
 def register(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        User.objects.create_user(username = username, password = password)
+
+        # 1. Check for empty fields
+        if not username or not password:
+            return render(request, 'tasks-temps/register.html', {'error': 'Please fill in all fields.'})
+
+        # 2. Check if username already exists
+        if User.objects.filter(username=username).exists():
+            return render(request, 'tasks-temps/register.html', {'error': 'That username is already taken. Please choose another.'})
+
+        # 3. Disallow passwords that are only numbers
+        if password.isdigit():
+            return render(request, 'tasks-temps/register.html', {'error': 'Password cannot contain only numbers. Please include letters.'})
+
+        # 4. (Recommended) Minimum length check
+        if len(password) < 6:
+            return render(request, 'tasks-temps/register.html', {'error': 'Password must be at least 6 characters long.'})
+
+        # Create user safely
+        User.objects.create_user(username=username, password=password)
         return redirect('login')
-    return render(request,'tasks-temps/register.html')
+
+    return render(request, 'tasks-temps/register.html')
+
+
+
+
+
+
 
 
 def user_login(request):
